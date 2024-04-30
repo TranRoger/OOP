@@ -1,0 +1,1 @@
+log("Exception tại hàm export. Lí do: Invalid input exception");

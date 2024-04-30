@@ -1,0 +1,7 @@
+1234567890123|The Godfather|Mario Puzo|English|1969|14.63|75|14/03/2024 23:46:51
+9780618002300|The Hobbit|J.R.R. Tolkien|English|1937|11.25|20|10/03/2024 12:00:00
+9780141439518|Pride and Prejudice|Jane Austen|English|1813|8.75|25|10/03/2024 11:00:00
+9780452284234|1984|George Orwell|English|1949|9.99|50|10/03/2024 10:00:00
+9780061120084|To Kill a Mockingbird|Harper Lee|English|1960|12.5|75|10/03/2024 09:15:00
+9783161484100|The Great Gatsby|F. Scott Fitzgerald|English|1925|10.99|95|10/03/2024 08:30:00
+123567890124|Hoang anh an l|Hung Anh|Vietnamese|2024|15.22|35|16/03/2024 08:14:33

@@ -1,0 +1,8 @@
+﻿  Book.cpp
+  BookStore.cpp
+E:\HOC TAP\2023-2024 HK2\OOP\W02\22120016\22120016\BookStore.cpp(353,23): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  DateTime.cpp
+  main.cpp
+E:\HOC TAP\2023-2024 HK2\OOP\W02\22120016\22120016\main.cpp(28,67): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  22120016.vcxproj -> E:\HOC TAP\2023-2024 HK2\OOP\W02\22120016\x64\Debug\22120016.exe

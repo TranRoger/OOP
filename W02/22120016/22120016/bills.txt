@@ -1,0 +1,8 @@
+Van Bay|15/03/2024 00:26:32|2
+1|1234567890123|The Godfather|3
+2|9780141439518|Pride and Prejudice|2
+Minh Anh|15/03/2024 00:24:24|2
+1|9783161484100|The Great Gatsby|2
+2|9780141439518|Pride and Prejudice|3
+Hung Anh|15/03/2024 00:04:38|1
+1|1234567890123|The Godfather|1
