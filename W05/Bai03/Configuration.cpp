@@ -7,12 +7,12 @@ Configuration::Configuration() {
 }
 
 // accessor
-int Configuration::getSeed() {
-    return _seed;
-}
-
 vector<pair<int, int>> Configuration::getRate() {
     return _rate;
+}
+
+vector<pair<int, int>> Configuration::getConfig() {
+    return _configRate;
 }
 
 // operation
@@ -23,13 +23,13 @@ void Configuration::loadConfig() { // get config data
         throw runtime_error("File not found.");
         return;
     }
-    string maxCount, seed;
-    getline(fin, maxCount);
-    getline(fin, seed);
-    maxCount.erase(0, maxCount.find('=') + 1);
-    seed.erase(0, seed.find('=') + 1);
-    _maxCount = stoi(maxCount);
-    _seed = stoi(seed);
+    while (!fin.eof()) {
+        string a, b;
+        getline(fin, a, '=');
+        getline(fin, b);
+        pair<int, int> r(stoi(a), stoi(b));
+        _configRate.push_back(r);
+    }
     fin.close();
 }
 

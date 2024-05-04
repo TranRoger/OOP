@@ -13,9 +13,11 @@ using namespace std;
 class Random {
 private:
     Configuration _config;
+    bool _byConfig;
+    bool _callOnce;
 public:
     // constructor
-    Random();
+    Random(bool, bool);
     // operation
     Student next(Class &);
     vector<Student> getGroup(const vector<Student> &, const int &);
