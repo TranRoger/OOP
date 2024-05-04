@@ -1,0 +1,45 @@
+Q: làm sao để tạo một hàm random dựa theo tỷ lệ được cung cấp trong c++
+A: Để tạo một hàm random dựa trên tỷ lệ cụ thể trong C++, bạn có thể sử dụng std::discrete_distribution từ thư viện chuẩn <random>. std::discrete_distribution cho phép bạn xác định các khả năng xảy ra không đồng đều cho mỗi sự kiện có thể.
+
+Dưới đây là một ví dụ về cách sử dụng std::discrete_distribution để tạo một hàm random theo tỷ lệ:
+
+#include <iostream>
+#include <random>
+#include <vector>
+#include <numeric>
+#include <map>
+
+int main() {
+    // Khởi tạo nguồn random.
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    // Tạo một vector chứa tỷ lệ xác suất cho mỗi sự kiện.
+    std::vector<double> weights = {20, 30, 50}; // Tỷ lệ là 20%, 30%, và 50%.
+
+    // Tạo một discrete distribution dựa theo weights đã cho.
+    std::discrete_distribution<> dist(weights.begin(), weights.end());
+
+    // Tạo một map để theo dõi số lần mỗi sự kiện được chọn.
+    std::map<int, int> counts;
+    int num_trials = 10000; // Số lần thử nghiệm.
+
+    for (int i = 0; i < num_trials; ++i) {
+        int number = dist(gen);
+        counts[number]++;
+    }
+
+    // In ra kết quả.
+    for (auto p : counts) {
+        std::cout << p.first << " generated " << p.second << " times" << std::endl;
+    }
+
+    return 0;
+}
+
+
+Trong đoạn mã trên, std::vector<double> weights chứa các tỷ lệ mà bạn muốn sử dụng cho hàm random. std::discrete_distribution sau đó sẽ sử dụng các trọng số này để quyết định sự kiện nào sẽ xảy ra sau mỗi lần gọi hàm dist(gen).
+
+Chú ý rằng std::random_device và std::mt19937 được sử dụng để tạo ra một nguồn sinh số ngẫu nhiên chất lượng cao, trong khi std::map<int, int> counts được sử dụng để theo dõi và in ra số lần mỗi sự kiện được chọn.
+
+Bạn có thể điều chỉnh num_trials để thay đổi số lần thực hiện và vector weights để thay đổi tỷ lệ xác suất của từng sự kiện.
