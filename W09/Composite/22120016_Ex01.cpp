@@ -3,6 +3,7 @@
 
 using namespace std;
 
+int Indent::indent = 0;
 int main() {
     CFolder C("C"); // (1)
     CFolder System("System");

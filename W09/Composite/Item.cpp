@@ -7,9 +7,17 @@ CFile::CFile(const std::string& name, const int& size) :
     _name(name), _size(size), _readOnly(false), _hidden(false) { }
 
 // method
+CItem* CFile::findByName(const std::string& name) {
+    if (!_hidden && name == _name) return this;
+    return nullptr;
+}
+
 void CFile::print(const bool& printHidden) {
     if (printHidden || !this->_hidden) { // only when function call does not print hidden file and the file is hidden does the function print nothing
-        std::cout << _name << "\tSize: " << _size << "Bytes" << std::endl;
+        Indent::indent++;
+        Indent::tab();
+        std::cout << _name << "--> Size: " << _size << "Bytes" << std::endl;
+        Indent::indent--;
     }
 }
 
@@ -37,9 +45,11 @@ CFolder::CFolder(const std::string& name) :
 
 // method
 void CFolder::add(CItem* item) {
-    if (nullptr != findByName(item->name())) { // if there is a file or folder with the same name, throw error
-        std::cout << "File or Folder is already existed." << std::endl;
-        return;
+    for (auto i : _components) {
+        if (item->name() == i->name()) {
+            std::cout << "File or folder is already existed." << std::endl;
+            return;
+        }
     }
     this->_components.push_back(item);
     this->_size += item->size();
@@ -57,24 +67,28 @@ CItem* CFolder::removeByName(const std::string& name) {
 }
 
 CItem* CFolder::findByName(const std::string& name) {
+    if (!_hidden && name == _name) return this;
     for (auto i : _components) {
-        if (i->name() == name && !i->isHidden()) { // if file or folder is not hidden then return it
-            return i;
-        }
+        CItem* r = i->findByName(name);
+        if (nullptr != r) return r;
     }
     return nullptr; // return nullptr if no file or folder was found
 }
 
 void CFolder::print(const bool& printHidden) {
-    std::cout << _name << "\tSize: " << _size << " Bytes" << std::endl;
+    if (!printHidden && _hidden) return;
+    Indent::indent++;
+    Indent::tab();
+    std::cout << _name << "--> Size: " << _size << " Bytes" << std::endl;
     for (auto i : _components) {
         i->print(printHidden);
     }
+    Indent::indent--;
 }
 
 void CFolder::setHidden(const bool& hidden, const bool& toChildren) {
     this->_hidden = hidden;
-    if (toChildren) {
+    if (!toChildren) {
         for (auto i : _components) {
             i->setHidden(hidden, toChildren);
         }
