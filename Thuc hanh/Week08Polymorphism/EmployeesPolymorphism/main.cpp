@@ -1,6 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Business/ParserFactory.h"
+#include "Business/DailyEmployeeParser.h"
+#include "Business/ManagerParser.h"
+#include "Business/ProductEmployeeParser.h"
+#include "Entity/Employee.h"
+#include "UI/IntegerToCurrencyConverter.h"
 
 using namespace std;
 

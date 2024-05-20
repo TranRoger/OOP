@@ -16,64 +16,34 @@ private:
     double _width;
     double _height;
 public:
-    Rectangle() : _width(1), _height(1) { }
-    Rectangle(const int &w, const int &h) : _width(w), _height(h) { }
+    Rectangle();
+    Rectangle(const int &, const int &);
     // method implementation
-    std::string toString() override {
-        std::stringstream builder;
-        builder << "Rectangle w=" << _width << ", h=" << _height;
-        return builder.str();
-    }
-
-    double area() override {
-        return _width * _height;
-    }
-
-    double perimeter() override {
-        return 2 * (_width + _height);
-    }
+    std::string toString() override;
+    double area() override ;
+    double perimeter() override ;
 };
 
 class Square : public IShape {
 private:
     double _a;
 public:
-    Square() : _a(1) { }
-    Square(const int &a) : _a(a) { }
+    Square();
+    Square(const int &);
     // method implementation
-    std::string toString() override {
-        std::stringstream builder;
-        builder << "Square a=" << _a;
-        return builder.str();
-    }
-
-    double area() override {
-        return _a * _a;
-    }
-
-    double perimeter() override {
-        return 4 * _a;
-    }
+    std::string toString() override;
+    double area() override;
+    double perimeter() override;
 };
 
 class Circle : public IShape {
 private:
     double _radius;
 public:
-    Circle() : _radius(1) { }
-    Circle(const int &r) : _radius(r) { }
+    Circle();
+    Circle(const int &r);
     // method implementation
-    std::string toString() override {
-        std::stringstream builder;
-        builder << "Circle r=" << _radius;
-        return builder.str();
-    }
-
-    double area() override {
-        return 3.14 * _radius * _radius;
-    }
-
-    double perimeter() override {
-        return 2 * _radius * 3.14;
-    }
+    std::string toString() override;
+    double area() override;
+    double perimeter() override;
 };

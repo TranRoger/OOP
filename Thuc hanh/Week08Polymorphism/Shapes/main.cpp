@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "Shape.h"
 #include "ParserFactory.h"
 #include "Utils.h"
@@ -7,6 +8,7 @@
 
 using namespace std;
 
+ParserFactory *ParserFactory::instance = nullptr;
 int main() {
     vector<string> lines = {
         "Square: a=12",
@@ -18,18 +20,18 @@ int main() {
         "Square: a=8"
     };
 
-    ParserFactory factory;
-    factory.registerWith(new RectangleParser());
-	factory.registerWith(new SquareParser());
-	factory.registerWith(new CircleParser());
+    ParserFactory *factory = ParserFactory::getInstance();
+    factory->registerWith(shared_ptr<RectangleParser> (new RectangleParser()));
+	factory->registerWith(shared_ptr<SquareParser> (new SquareParser()));
+	factory->registerWith(shared_ptr<CircleParser> (new CircleParser()));
 
-    vector<IShape*> shapes;
+    vector<shared_ptr<IShape>> shapes;
         
     for (auto& line : lines) {
-				// Example: line = "Square: a=12"
-				vector<string> tokens = Utils::String::split(line, ": ");
-				IParsable* parser = factory.create(tokens[0]); // "Square"=> SquareParser
-        IShape* shape = dynamic_cast<IShape*> (parser->parse(tokens[1])); // "a=12" => Square(_a = 12)
+        // Example: line = "Square: a=12"
+        vector<string> tokens = Utils::String::split(line, ": ");
+        shared_ptr<IParsable> parser = factory->create(tokens[0]); // "Square"=> SquareParser
+        shared_ptr<IShape> shape = dynamic_pointer_cast<IShape>(parser->parse(tokens[1])); // "a=12" => Square(_a = 12)
         shapes.push_back(shape);
     }
 
@@ -37,10 +39,5 @@ int main() {
         cout << shape->toString() << ": area=" 
             << shape->area() << ", perimeter=" 
             << shape->perimeter() << endl;
-    }
-
-    // free allocated memory
-    for (auto &shape : shapes) {
-        delete shape;
     }
 }

@@ -7,21 +7,33 @@
 
 class ParserFactory {
 private:
-    std::map<std::string, IParsable*> _container; 
+    std::map<std::string, std::shared_ptr<IParsable>> _container; 
+protected:
+    ParserFactory() { }
+    static ParserFactory* instance;
 public:
-    void registerWith(IParsable* parser) {
+    ParserFactory(ParserFactory &other) = delete;
+
+    void operator= (const ParserFactory& other) = delete;
+
+    static ParserFactory* getInstance() {
+        if (nullptr == instance) {
+            instance = new ParserFactory;
+        }
+        return instance;
+    }
+
+    void registerWith(shared_ptr<IParsable> parser) {
         _container.insert(
             {parser->parsedObjectName(), parser}
         );
     }
 
-    IParsable *create(std::string type) {
+    std::shared_ptr<IParsable> create(std::string type) {
         return _container[type];
     }
 
     ~ParserFactory() {
-        for (auto &p : _container) {
-        delete p.second;
-        }
+        delete instance;
     }
 };
